@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAFIA NO$TRA RECORDS | Official Website</title>
+    <!-- Favicon desde Cloudinary -->
+    <link rel="icon" href="https://res.cloudinary.com/zs4kvady/image/upload/v1785447097/favicon.ico_qbqsni.png" type="image/x-icon">
+    <!-- Tailwind CSS para diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#070707',
+                        brandRed: '#D3122A',
+                        spotifyGreen: '#1DB954',
+                        youtubeRed: '#FF0000',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Animación para las cintas rotativas de la tienda */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 15s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-brandDark text-white font-sans antialiased selection:bg-brandRed selection:text-white">
+
+    <!-- HERO SECTION: VIDEO 3D CLOUDINARY (PANTALLA COMPLETA) -->
+    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://res.cloudinary.com/zs4kvady/video/upload/v1785447102/video-hero-3d.mp4_nqwbuh.mp4" type="video/mp4">
+        </video>
+
+        <!-- Sombra sutil superior e inferior -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-brandDark z-10 pointer-events-none"></div>
+
+        <!-- Menú Superior / Navegación Transparente -->
+        <nav class="absolute top-0 left-0 w-full z-30 flex justify-between items-center px-6 md:px-12 py-6 bg-transparent">
+            <!-- Logo oficial desde Cloudinary -->
+            <div class="flex items-center">
+                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447096/logo-mafianostra.png_hhba91.png" alt="MAFIA NO$TRA RECORDS" class="h-10 md:h-14 object-contain filter drop-shadow-lg">
+            </div>
+            <!-- Enlaces del menú flotante -->
+            <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase text-white drop-shadow">
+                <a href="#roster" class="hover:text-brandRed transition">Artistas</a>
+                <a href="#music" class="hover:text-brandRed transition">Música</a>
+                <a href="#merch" class="hover:text-brandRed transition">Merch</a>
+                <a href="#about" class="hover:text-brandRed transition">Nosotros</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN: ROSTER DE ARTISTAS -->
+    <section id="roster" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center max-w-4xl mx-auto mb-16">
+            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">Talentos</h2>
+            <p class="text-gray-300 text-sm md:text-base font-semibold leading-relaxed tracking-wide uppercase border-y border-zinc-800 py-6">
+                Bogotá en el mapa, el movimiento en las venas. Nacidos en las calles de la capital para dominar el juego, en <span class="text-white font-black">MAFIA NO<span class="text-brandRed">$</span>TRA</span> transformamos vivencias reales, representamos la cultura real urbana. Sin filtros, solo código de calle: aquí la cultura no se hereda, se crea.
+                <span class="block text-brandRed font-black text-base md:text-lg tracking-widest mt-4">HONOR, RESPETO, FAMILIA</span>
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- ARTISTA 1: ZETTA -->
+            <div class="group relative overflow-hidden bg-zinc-950 border border-zinc-800/80 rounded-lg aspect-[3/4] flex flex-col justify-between">
+                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447170/artist-1.jpg_ksjk9p.png" alt="ZETTA" class="w-full h-full object-cover absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end z-10">
+                    <span class="text-xs font-bold text-brandRed uppercase tracking-widest">Cantante</span>
+                    <h3 class="text-3xl font-black uppercase tracking-wider mb-3">ZETTA</h3>
+                    <a href="https://www.instagram.com/zetta.rar/?hl=zh-cn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-extrabold text-white hover:text-brandRed transition">
+                        <span>INSTAGRAM</span>
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ARTISTA 2: ANIMALT$ -->
+            <div class="group relative overflow-hidden bg-zinc-950 border border-zinc-800/80 rounded-lg aspect-[3/4] flex flex-col justify-between">
+                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447171/artist-2.jpg_pbxedh.png" alt="ANIMALT$" class="w-full h-full object-cover absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end z-10">
+                    <span class="text-xs font-bold text-brandRed uppercase tracking-widest">Cantante</span>
+                    <h3 class="text-3xl font-black uppercase tracking-wider mb-3">ANIMALT<span class="text-brandRed">$</span></h3>
+                    <a href="https://www.instagram.com/freeanimalts/?hl=zh-cn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-extrabold text-white hover:text-brandRed transition">
+                        <span>INSTAGRAM</span>
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ARTISTA 3: MANUVA -->
+            <div class="group relative overflow-hidden bg-zinc-950 border border-zinc-800/80 rounded-lg aspect-[3/4] flex flex-col justify-between">
+                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447156/artist-3.jpg_m7bt6p.png" alt="MANUVA" class="w-full h-full object-cover absolute inset-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 flex flex-col justify-end z-10">
+                    <span class="text-xs font-bold text-brandRed uppercase tracking-widest">Cantante</span>
+                    <h3 class="text-3xl font-black uppercase tracking-wider mb-3">MANUVA</h3>
+                    <a href="https://www.instagram.com/manuvamusic/?hl=zh-cn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-extrabold text-white hover:text-brandRed transition">
+                        <span>INSTAGRAM</span>
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN: MÚSICA DESTACADA -->
+    <section id="music" class="py-24 bg-black border-y border-zinc-900 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-2">Música Destacada</h2>
+                <p class="text-gray-400 text-sm tracking-widest uppercase">Lanzamientos oficiales de MAFIA NO$TRA RECORDS.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- TRACK 1: MALKOVA -->
+                <div class="bg-zinc-950 border border-zinc-800 p-5 rounded-lg flex flex-col justify-between hover:border-zinc-700 transition">
+                    <div class="relative w-full aspect-square bg-zinc-900 rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447219/track-1.jpg_vjhy3z.jpg" alt="MALKOVA" class="w-full h-full object-cover absolute inset-0">
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-brandRed">Sencillo 01</span>
+                        <h4 class="font-black text-2xl uppercase tracking-wider text-white">MALKOVA</h4>
+                        <p class="text-xs text-gray-400 mb-6">MAFIA NO$TRA RECORDS</p>
+                    </div>
+                    <div class="flex items-center justify-center space-x-8 pt-4 border-t border-zinc-800/80">
+                        <a href="https://open.spotify.com/track/0V1xOZWMuZBUiMpIC4Ewe5?si=gFV_cCnRQxi0uQcjwDqFnw&utm_source=whatsapp" target="_blank" rel="noopener noreferrer" class="text-spotifyGreen hover:scale-110 transition-transform p-1">
+                            <svg class="w-8 h-8 filter drop-shadow-[0_0_8px_rgba(29,185,84,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.019zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=FQ79fj3znP8&list=RDFQ79fj3znP8&start_radio=1" target="_blank" rel="noopener noreferrer" class="text-youtubeRed hover:scale-110 transition-transform p-1">
+                            <svg class="w-9 h-9 filter drop-shadow-[0_0_8px_rgba(255,0,0,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TRACK 2: KETA Y AZUCAR -->
+                <div class="bg-zinc-950 border border-zinc-800 p-5 rounded-lg flex flex-col justify-between hover:border-zinc-700 transition">
+                    <div class="relative w-full aspect-square bg-zinc-900 rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448188/track-2.jpg_djfp1g.jpg" alt="KETA Y AZUCAR" class="w-full h-full object-cover absolute inset-0">
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-brandRed">Sencillo 02</span>
+                        <h4 class="font-black text-2xl uppercase tracking-wider text-white">KETA Y AZUCAR</h4>
+                        <p class="text-xs text-gray-400 mb-6">MAFIA NO$TRA RECORDS</p>
+                    </div>
+                    <div class="flex items-center justify-center space-x-8 pt-4 border-t border-zinc-800/80">
+                        <a href="https://open.spotify.com/track/6puj1NTwXc5qy1Gm5Tg8Ct?si=iA1Plsz-TaCapA7hjzksgg&utm_source=whatsapp" target="_blank" rel="noopener noreferrer" class="text-spotifyGreen hover:scale-110 transition-transform p-1">
+                            <svg class="w-8 h-8 filter drop-shadow-[0_0_8px_rgba(29,185,84,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.019zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=v40OT2Py_zA&list=RDv40OT2Py_zA&start_radio=1" target="_blank" rel="noopener noreferrer" class="text-youtubeRed hover:scale-110 transition-transform p-1">
+                            <svg class="w-9 h-9 filter drop-shadow-[0_0_8px_rgba(255,0,0,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TRACK 3: TRACK 333 -->
+                <div class="bg-zinc-950 border border-zinc-800 p-5 rounded-lg flex flex-col justify-between hover:border-zinc-700 transition">
+                    <div class="relative w-full aspect-square bg-zinc-900 rounded mb-4 flex items-center justify-center overflow-hidden">
+                        <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448184/track-3.jpg_hzz75c.jpg" alt="TRACK 333" class="w-full h-full object-cover absolute inset-0">
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-brandRed">Sencillo 03</span>
+                        <h4 class="font-black text-2xl uppercase tracking-wider text-white">TRACK 333</h4>
+                        <p class="text-xs text-gray-400 mb-6">MAFIA NO$TRA RECORDS</p>
+                    </div>
+                    <div class="flex items-center justify-center space-x-8 pt-4 border-t border-zinc-800/80">
+                        <a href="https://open.spotify.com/track/2ngn0LDHFodWi74q58ywqt?si=pjWzcF4uT1WPB37xN0ZI7w&utm_source=whatsapp" target="_blank" rel="noopener noreferrer" class="text-spotifyGreen hover:scale-110 transition-transform p-1">
+                            <svg class="w-8 h-8 filter drop-shadow-[0_0_8px_rgba(29,185,84,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.899 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.019zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=v40OT2Py_zA&list=RDv40OT2Py_zA&start_radio=1" target="_blank" rel="noopener noreferrer" class="text-youtubeRed hover:scale-110 transition-transform p-1">
+                            <svg class="w-9 h-9 filter drop-shadow-[0_0_8px_rgba(255,0,0,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: MERCH -->
+    <section id="merch" class="py-24 overflow-hidden bg-brandDark relative">
+        <div class="text-center mb-12 max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-2">Official Store</h2>
+            <p class="text-gray-400 text-sm tracking-widest uppercase">Línea exclusiva de indumentaria oficial MAFIA NO$TRA.</p>
+        </div>
+
+        <div class="relative py-12 flex items-center justify-center mb-16">
+            <div class="absolute w-[120%] bg-white text-black font-black text-xl md:text-2xl py-2 tracking-widest uppercase rotate-[-2deg] shadow-xl overflow-hidden z-10 border-y-2 border-black">
+                <div class="animate-marquee whitespace-nowrap">
+                    <span class="mx-4">TIENDA OFICIAL • MAFIA NO$TRA • TIENDA OFICIAL • MAFIA NO$TRA •</span>
+                    <span class="mx-4">TIENDA OFICIAL • MAFIA NO$TRA • TIENDA OFICIAL • MAFIA NO$TRA •</span>
+                </div>
+            </div>
+            <div class="absolute w-[120%] bg-brandRed text-white font-black text-xl md:text-2xl py-2 tracking-widest uppercase rotate-[2deg] shadow-xl overflow-hidden z-20 border-y-2 border-black">
+                <div class="animate-marquee whitespace-nowrap" style="animation-direction: reverse;">
+                    <span class="mx-4">PRÓXIMAMENTE • COMING SOON • PRÓXIMAMENTE • COMING SOON • PRÓXIMAMENTE •</span>
+                    <span class="mx-4">PRÓXIMAMENTE • COMING SOON • PRÓXIMAMENTE • COMING SOON • PRÓXIMAMENTE •</span>
+                </div>
+            </div>
+            <div class="h-20"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- HOODIE 1 -->
+            <div class="group border border-zinc-800 p-5 bg-zinc-950 rounded-lg hover:border-zinc-700 transition">
+                <div class="relative aspect-square bg-zinc-900 mb-4 overflow-hidden rounded">
+                    <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448329/hoodie-black.jpg_zfxmjl.jpg" 
+                         alt="MafiaNostra Black Hoodie 1" 
+                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0">
+                    <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448328/hoodie-black-modelo.png_c1sqav.png" 
+                         alt="MafiaNostra Black Hoodie 1 Modelo" 
+                         class="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0">
+                </div>
+                
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-black uppercase tracking-wide text-lg text-white">MafiaNostra Black Hoodie V1</h3>
+                        <p class="text-xs text-brandRed font-bold">Pasa el cursor / toca para ver en modelo</p>
+                    </div>
+                    <p class="text-white font-bold">$60.00 USD</p>
+                </div>
+                <button class="w-full mt-4 bg-white text-black py-3 text-xs font-black uppercase tracking-widest hover:bg-brandRed hover:text-white transition">Comprar</button>
+            </div>
+
+            <!-- HOODIE 2 -->
+            <div class="group border border-zinc-800 p-5 bg-zinc-950 rounded-lg hover:border-zinc-700 transition">
+                <div class="relative aspect-square bg-zinc-900 mb-4 overflow-hidden rounded">
+                    <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448329/hoodie-black2.png_lypcts.png" 
+                         alt="MafiaNostra Black Hoodie 2" 
+                         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0">
+                    <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448329/hoodie-black2-modelo.jpg_jxxb0v.jpg" 
+                         alt="MafiaNostra Black Hoodie 2 Modelo" 
+                         class="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0">
+                </div>
+                
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-black uppercase tracking-wide text-lg text-white">MafiaNostra Black Hoodie V2</h3>
+                        <p class="text-xs text-brandRed font-bold">Pasa el cursor / toca para ver en modelo</p>
+                    </div>
+                    <p class="text-white font-bold">$60.00 USD</p>
+                </div>
+                <button class="w-full mt-4 bg-white text-black py-3 text-xs font-black uppercase tracking-widest hover:bg-brandRed hover:text-white transition">Comprar</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="about" class="border-t border-zinc-900 py-16 px-6 md:px-12 bg-black text-zinc-400 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <h3 class="text-white text-lg font-black uppercase tracking-widest mb-4">MAFIA NO<span class="text-brandRed">$</span>TRA RECORDS</h3>
+                <p class="leading-relaxed text-gray-400 mb-4">
+                    Somos un sello independiente nacido en Bogotá localidad de kennedy con una única misión: apoyar el talento del barrio, de toda la capital de Colombia, representamos los sueños y ayudamos a cumplirlos, En este canal, Mafia Nostra se encarga de crear conexiones únicas juntando artistas de Bogotá con los mejores talentos de otras ciudades de Colombia.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-black uppercase tracking-widest mb-4 border-b border-zinc-800 pb-2 inline-block">Navegación</h4>
+                <ul class="space-y-2 font-bold">
+                    <li><a href="#roster" class="hover:text-brandRed transition">Artistas</a></li>
+                    <li><a href="#music" class="hover:text-brandRed transition">Música</a></li>
+                    <li><a href="#merch" class="hover:text-brandRed transition">Tienda</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-black uppercase tracking-widest mb-4 border-b border-zinc-800 pb-2 inline-block">Síguenos en Redes</h4>
+                <div class="flex flex-col space-y-3 font-bold">
+                    <a href="https://www.facebook.com/profile.php?id=61583459586702" target="_blank" rel="noopener noreferrer" class="hover:text-brandRed transition flex items-center">
+                        <span class="w-20">FACEBOOK</span>
+                        <span class="text-zinc-600 font-normal">@mafianostrarecords</span>
+                    </a>
+                    <a href="https://www.instagram.com/mafianostrarecords/?hl=zh-cn" target="_blank" rel="noopener noreferrer" class="hover:text-brandRed transition flex items-center">
+                        <span class="w-20">INSTAGRAM</span>
+                        <span class="text-zinc-600 font-normal">@mafianostrarecords</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@mafianostrarecords" target="_blank" rel="noopener noreferrer" class="hover:text-brandRed transition flex items-center">
+                        <span class="w-20">TIKTOK</span>
+                        <span class="text-zinc-600 font-normal">@mafianostrarecords</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <p>© 2026 MAFIA NO$TRA RECORDS. Todos los derechos reservados.</p>
+            <p class="text-brandRed font-black uppercase tracking-widest">LO TUYO, LO MIO, LO NUE$TRO</p>
+        </div>
+    </footer>
+
+</body>
+</html>
