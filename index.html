@@ -37,13 +37,74 @@
             width: 200%;
             animation: marquee 15s linear infinite;
         }
+
+        /* Estilo reticulado para el quiz interactivo estilo Platzi */
+        .bg-grid-pattern {
+            background-color: #0d0d0d;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
     </style>
 </head>
 <body class="bg-brandDark text-white font-sans antialiased selection:bg-brandRed selection:text-white">
 
+    <!-- ======================================================= -->
+    <!-- CAPA INTERACTIVA / QUIZ DE ENTRADA (ESTILO PLATZI / MAFIA) -->
+    <!-- ======================================================= -->
+    <div id="quiz-overlay" class="fixed inset-0 z-50 bg-grid-pattern flex flex-col items-center justify-center p-6 transition-opacity duration-700">
+        
+        <!-- Contenedor Principal del Quiz -->
+        <div class="max-w-xl w-full bg-zinc-950/90 border border-zinc-800 p-8 rounded-xl shadow-2xl backdrop-blur-md relative text-center">
+            
+            <!-- Logo Superior -->
+            <div class="flex justify-center mb-6">
+                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447096/logo-mafianostra.png_hhba91.png" alt="MAFIA NO$TRA" class="h-12 object-contain">
+            </div>
+
+            <!-- Título del Desafío -->
+            <span class="inline-block px-3 py-1 bg-brandRed/20 text-brandRed text-[10px] font-black tracking-widest uppercase rounded-full mb-3 border border-brandRed/30">
+                RETO DE ACCESO RESTRICTO
+            </span>
+            <h2 class="text-xl md:text-2xl font-black uppercase tracking-wide text-white mb-6">
+                ¿Cuál es el verdadero código que define la cultura de la calle?
+            </h2>
+
+            <!-- Opciones del Quiz -->
+            <div id="quiz-options" class="space-y-4 text-left mb-8">
+                <button onclick="checkAnswer(false, this)" class="w-full p-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-600 rounded-lg text-sm font-bold uppercase tracking-wider text-gray-300 transition flex items-center justify-between group">
+                    <span>A) Aparentar lo que no se es y buscar fama rápida</span>
+                    <span class="w-4 h-4 rounded-full border border-zinc-700 group-hover:border-zinc-500"></span>
+                </button>
+
+                <button onclick="checkAnswer(true, this)" class="w-full p-4 bg-zinc-900 border border-zinc-800 hover:border-brandRed rounded-lg text-sm font-bold uppercase tracking-wider text-gray-300 transition flex items-center justify-between group">
+                    <span>B) Honor, Respeto, Familia y Cultura Real</span>
+                    <span class="w-4 h-4 rounded-full border border-zinc-700 group-hover:border-brandRed"></span>
+                </button>
+
+                <button onclick="checkAnswer(false, this)" class="w-full p-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-600 rounded-lg text-sm font-bold uppercase tracking-wider text-gray-300 transition flex items-center justify-between group">
+                    <span>C) Seguir la corriente comercial sin identidad propia</span>
+                    <span class="w-4 h-4 rounded-full border border-zinc-700 group-hover:border-zinc-500"></span>
+                </button>
+            </div>
+
+            <!-- Mensaje de Feedback -->
+            <p id="feedback-msg" class="text-xs font-bold uppercase tracking-widest min-h-[20px] mb-4 text-zinc-500"></p>
+
+            <!-- Botón Opcional para Saltar -->
+            <button onclick="unlockWebsite()" class="text-[11px] font-bold text-zinc-500 hover:text-white underline tracking-widest uppercase transition">
+                [ Saltar reto e ingresar a la web ]
+            </button>
+        </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- PÁGINA PRINCIPAL MAFIA NO$TRA RECORDS -->
+    <!-- ======================================================= -->
+
     <!-- HERO SECTION: VIDEO 3D CLOUDINARY (PANTALLA COMPLETA) -->
     <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+        <video id="hero-video" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
             <source src="https://res.cloudinary.com/zs4kvady/video/upload/v1785447102/video-hero-3d.mp4_nqwbuh.mp4" type="video/mp4">
         </video>
 
@@ -178,7 +239,7 @@
                     </div>
                 </div>
 
-                <!-- TRACK 3: TRACK 333 (URL YOUTUBE ACTUALIZADO) -->
+                <!-- TRACK 3: TRACK 333 -->
                 <div class="bg-zinc-950 border border-zinc-800 p-5 rounded-lg flex flex-col justify-between hover:border-zinc-700 transition">
                     <div class="relative w-full aspect-square bg-zinc-900 rounded mb-4 flex items-center justify-center overflow-hidden">
                         <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785448184/track-3.jpg_hzz75c.jpg" alt="TRACK 333" class="w-full h-full object-cover absolute inset-0">
@@ -231,7 +292,7 @@
 
         <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- HOODIE 1 (NUEVA IMAGEN DE CLOUDINARY) -->
+            <!-- HOODIE 1 -->
             <div class="group border border-zinc-800 p-5 bg-zinc-950 rounded-lg hover:border-zinc-700 transition">
                 <div class="relative aspect-square bg-zinc-900 mb-4 overflow-hidden rounded flex items-center justify-center">
                     <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785450568/hoodie-black.jpg_uyoaic.jpg" 
@@ -321,5 +382,53 @@
         </div>
     </footer>
 
+    <!-- ======================================================= -->
+    <!-- LÓGICA JAVASCRIPT DEL QUIZ DE ENTRADA -->
+    <!-- ======================================================= -->
+    <script>
+        // Bloquear el scroll mientras el quiz esté activo
+        document.body.style.overflow = 'hidden';
+
+        function checkAnswer(isCorrect, element) {
+            const feedback = document.getElementById('feedback-msg');
+            
+            if (isCorrect) {
+                element.classList.remove('bg-zinc-900', 'border-zinc-800');
+                element.classList.add('bg-brandRed', 'border-brandRed', 'text-white');
+                feedback.className = "text-xs font-bold uppercase tracking-widest min-h-[20px] mb-4 text-spotifyGreen";
+                feedback.innerText = "✓ CÓDIGO ACEPTADO. ACCESO CONCEDIDO...";
+                
+                setTimeout(() => {
+                    unlockWebsite();
+                }, 1000);
+            } else {
+                element.classList.remove('bg-zinc-900', 'border-zinc-800');
+                element.classList.add('bg-red-950/60', 'border-brandRed', 'text-brandRed');
+                feedback.className = "text-xs font-bold uppercase tracking-widest min-h-[20px] mb-4 text-brandRed";
+                feedback.innerText = "✕ CÓDIGO INCORRECTO. VUELVE A INTENTARLO.";
+                
+                setTimeout(() => {
+                    element.classList.remove('bg-red-950/60', 'border-brandRed', 'text-brandRed');
+                    element.classList.add('bg-zinc-900', 'border-zinc-800');
+                }, 1200);
+            }
+        }
+
+        function unlockWebsite() {
+            const overlay = document.getElementById('quiz-overlay');
+            overlay.style.opacity = '0';
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Habilitar scroll
+                
+                // Asegurar reproducción del video hero
+                const video = document.getElementById('hero-video');
+                if (video) {
+                    video.play().catch(e => console.log("Autoplay interactivo listo"));
+                }
+            }, 700);
+        }
+    </script>
 </body>
 </html>
