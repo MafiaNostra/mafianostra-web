@@ -8,7 +8,7 @@
     <link rel="icon" href="https://res.cloudinary.com/zs4kvady/image/upload/v1785447097/favicon.ico_qbqsni.png" type="image/x-icon">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js para la Galaxia 3D Interactiva -->
+    <!-- Three.js para la Constelación de Bogotá 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         tailwind.config = {
@@ -44,24 +44,24 @@
 <body class="bg-brandDark text-white font-sans antialiased selection:bg-brandRed selection:text-white">
 
     <!-- ======================================================= -->
-    <!-- CAPA INTERACTIVA: GALAXIA 3D INTERACTIVA (ESTILO OPENAI) -->
+    <!-- CAPA INTERACTIVA: CONSTELACIÓN BOGOTÁ 3D (ESTILO GALAXIA) -->
     <!-- ======================================================= -->
     <div id="galaxy-overlay" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-between p-6 transition-opacity duration-1000 overflow-hidden cursor-grab active:cursor-grabbing">
         
-        <!-- Canvas para renderizar la galaxia 3D -->
+        <!-- Canvas para renderizar la constelación 3D -->
         <canvas id="galaxy-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
 
-        <!-- Elementos Flotantes sobre la Galaxia -->
+        <!-- Elementos Flotantes sobre el Mapa -->
         <div class="relative z-10 w-full flex justify-between items-center pointer-events-none px-4 md:px-8 pt-4">
             <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447096/logo-mafianostra.png_hhba91.png" alt="MAFIA NO$TRA" class="h-10 md:h-12 object-contain filter drop-shadow-[0_0_15px_rgba(211,18,42,0.6)]">
-            <span class="text-[10px] font-black tracking-widest uppercase text-gray-400 border border-zinc-800 bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                [ Arrastra para girar la galaxia ]
+            <span class="text-[10px] font-black tracking-widest uppercase text-gray-300 border border-brandRed/40 bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm">
+                [ BOGOTÁ EN EL MAPA • MUEVE LA CIUDAD ]
             </span>
         </div>
 
         <!-- Botón Inferior de Ingreso -->
         <div class="relative z-10 mb-8 text-center pointer-events-auto">
-            <button onclick="unlockWebsite()" class="bg-brandRed/90 hover:bg-brandRed text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest transition duration-300 shadow-[0_0_30px_rgba(211,18,42,0.5)] border border-brandRed/50 hover:scale-105 active:scale-95">
+            <button onclick="unlockWebsite()" class="bg-brandRed/90 hover:bg-brandRed text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest transition duration-300 shadow-[0_0_30px_rgba(211,18,42,0.6)] border border-brandRed/50 hover:scale-105 active:scale-95">
                 Ingresar al Universo MAFIA NO$TRA
             </button>
         </div>
@@ -352,19 +352,17 @@
     </footer>
 
     <!-- ======================================================= -->
-    <!-- LÓGICA THREE.JS: GALAXIA 3D INTERACTIVA CON MOUSE / TOUCH -->
+    <!-- LÓGICA THREE.JS: MAPA DE BOGOTÁ INTERACTIVO EN 3D -->
     <!-- ======================================================= -->
     <script>
         document.body.style.overflow = 'hidden';
 
-        // Variables principales de Three.js
-        let scene, camera, renderer, particles;
+        let scene, camera, renderer, bogotaParticles;
         let isMouseDown = false;
         let previousMousePosition = { x: 0, y: 0 };
         const overlay = document.getElementById('galaxy-overlay');
 
-        function initGalaxy() {
-            const container = document.getElementById('galaxy-overlay');
+        function initBogotaGalaxy() {
             const canvas = document.getElementById('galaxy-canvas');
 
             // 1. Escena
@@ -372,47 +370,53 @@
 
             // 2. Cámara
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 120;
+            camera.position.z = 110;
 
             // 3. Renderizador
             renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // 4. Parámetros de la Galaxia
-            const count = 12000;
-            const arms = 4;
-            const radius = 90;
-            const spin = 1;
-
+            // 4. Parámetros de la Constelación de Bogotá
+            const particleCount = 14000;
             const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(count * 3);
-            const colors = new Float32Array(count * 3);
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
 
-            const colorInside = new THREE.Color('#ffffff');
-            const colorMiddle = new THREE.Color('#d3122a'); // Rojo Mafia
-            const colorOutside = new THREE.Color('#3b82f6'); // Azul estelar
+            const colorCore = new THREE.Color('#d3122a');  // Rojo Mafia principal
+            const colorEdge = new THREE.Color('#ffffff');  // Blanco estelar
+            const colorGlow = new THREE.Color('#60a5fa');  // Destellos azules
 
-            for (let i = 0; i < count; i++) {
-                // Posición radial
-                const r = Math.random() * radius;
-                const spinAngle = r * spin;
-                const armAngle = ((i % arms) / arms) * Math.PI * 2;
+            for (let i = 0; i < particleCount; i++) {
+                // Generar puntos dentro de la silueta alargada de Bogotá (eje Y alargado)
+                let y = (Math.random() - 0.5) * 110; // Alto de Bogotá (Norte a Sur)
+                
+                // Ancho dinámico basado en la geografía real (más ancho al centro/norte, angosto al sur)
+                let normalizedY = (y + 55) / 110; 
+                let maxWidth = 25;
+                
+                if (normalizedY > 0.4 && normalizedY < 0.85) {
+                    maxWidth = 38; // Zona urbana centro-norte (Suba, Usaquén, Engativá)
+                } else if (normalizedY <= 0.4) {
+                    maxWidth = 18; // Zona Sur (Usme, Sumapaz)
+                }
 
-                const randomX = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
-                const randomY = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
-                const randomZ = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
+                let x = (Math.random() - 0.5) * maxWidth;
+                let z = (Math.random() - 0.5) * 12; // Profundidad 3D
 
-                positions[i * 3] = Math.cos(armAngle + spinAngle) * r + randomX;
-                positions[i * 3 + 1] = randomY;
-                positions[i * 3 + 2] = Math.sin(armAngle + spinAngle) * r + randomZ;
+                // Asignar posiciones
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
 
-                // Color según la distancia del centro
-                const mixedColor = colorInside.clone();
-                if (r < radius * 0.4) {
-                    mixedColor.lerp(colorMiddle, r / (radius * 0.4));
-                } else {
-                    mixedColor.lerp(colorOutside, (r - radius * 0.4) / (radius * 0.6));
+                // Color según posición
+                let distFromCenter = Math.abs(x) / maxWidth;
+                let mixedColor = colorCore.clone();
+
+                if (distFromCenter > 0.6) {
+                    mixedColor.lerp(colorEdge, distFromCenter);
+                } else if (Math.random() > 0.85) {
+                    mixedColor.lerp(colorGlow, 0.8);
                 }
 
                 colors[i * 3] = mixedColor.r;
@@ -425,7 +429,7 @@
 
             // Material
             const material = new THREE.PointsMaterial({
-                size: 0.6,
+                size: 0.7,
                 sizeAttenuation: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
@@ -433,13 +437,15 @@
             });
 
             // Malla
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
+            bogotaParticles = new THREE.Points(geometry, material);
+            scene.add(bogotaParticles);
 
-            // Inclinación inicial para verla tipo espiral 3D
-            particles.rotation.x = 0.8;
+            // Inclinación inicial para vista 3D dramática
+            bogotaParticles.rotation.x = 0.2;
+            bogotaParticles.rotation.y = -0.3;
 
-            // Eventos Mouse/Touch para arrastrar la galaxia con la mano
+            // Eventos Táctiles y de Mouse para arrastrar el mapa
+            const container = document.getElementById('galaxy-overlay');
             container.addEventListener('mousedown', onPointerDown);
             container.addEventListener('mousemove', onPointerMove);
             window.addEventListener('mouseup', onPointerUp);
@@ -470,8 +476,8 @@
                 y: y - previousMousePosition.y
             };
 
-            particles.rotation.y += deltaMove.x * 0.008;
-            particles.rotation.x += deltaMove.y * 0.008;
+            bogotaParticles.rotation.y += deltaMove.x * 0.008;
+            bogotaParticles.rotation.x += deltaMove.y * 0.008;
 
             previousMousePosition = { x, y };
         }
@@ -489,9 +495,9 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotación suave continua cuando no se interactúa
-            if (!isMouseDown && particles) {
-                particles.rotation.y += 0.0015;
+            // Rotación espacial suave cuando el usuario no interactúa
+            if (!isMouseDown && bogotaParticles) {
+                bogotaParticles.rotation.y += 0.002;
             }
 
             renderer.render(scene, camera);
@@ -505,13 +511,12 @@
 
                 const video = document.getElementById('hero-video');
                 if (video) {
-                    video.play().catch(e => console.log("Autoplay interactivo listo"));
+                    video.play().catch(e => console.log("Autoplay listo"));
                 }
             }, 1000);
         }
 
-        // Inicializar galaxia al cargar la página
-        window.onload = initGalaxy;
+        window.onload = initBogotaGalaxy;
     </script>
 </body>
 </html>
