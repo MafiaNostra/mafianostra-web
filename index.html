@@ -6,8 +6,10 @@
     <title>MAFIA NO$TRA RECORDS | Official Website</title>
     <!-- Favicon desde Cloudinary -->
     <link rel="icon" href="https://res.cloudinary.com/zs4kvady/image/upload/v1785447097/favicon.ico_qbqsni.png" type="image/x-icon">
-    <!-- Tailwind CSS para diseño -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js para la Galaxia 3D Interactiva -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -37,80 +39,30 @@
             width: 200%;
             animation: marquee 15s linear infinite;
         }
-
-        /* Estilo reticulado para el portal interactivo */
-        .bg-grid-pattern {
-            background-color: #070707;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 35px 35px;
-        }
-
-        /* ANIMACIÓN LOGO 3D (GIRO + ROTACIÓN + ZOOM) */
-        @keyframes logo3dSpin {
-            0% {
-                transform: perspective(600px) rotateY(0deg) rotateX(0deg) scale(0.9);
-            }
-            50% {
-                transform: perspective(600px) rotateY(180deg) rotateX(10deg) scale(1.1);
-            }
-            100% {
-                transform: perspective(600px) rotateY(360deg) rotateX(0deg) scale(0.9);
-            }
-        }
-
-        .animate-logo-3d {
-            animation: logo3dSpin 7s infinite ease-in-out;
-            transform-style: preserve-3d;
-        }
     </style>
 </head>
 <body class="bg-brandDark text-white font-sans antialiased selection:bg-brandRed selection:text-white">
 
     <!-- ======================================================= -->
-    <!-- CAPA INTERACTIVA: LOGO 3D + MANIFIESTO POÉTICO -->
+    <!-- CAPA INTERACTIVA: GALAXIA 3D INTERACTIVA (ESTILO OPENAI) -->
     <!-- ======================================================= -->
-    <div id="quiz-overlay" class="fixed inset-0 z-50 bg-grid-pattern flex flex-col items-center justify-center p-6 transition-opacity duration-700 overflow-y-auto">
+    <div id="galaxy-overlay" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-between p-6 transition-opacity duration-1000 overflow-hidden cursor-grab active:cursor-grabbing">
         
-        <!-- Contenedor Principal -->
-        <div class="max-w-xl w-full bg-zinc-950/90 border border-zinc-800 p-8 rounded-xl shadow-2xl backdrop-blur-md relative text-center my-auto">
-            
-            <!-- LOGO 3D ANIMADO -->
-            <div class="flex justify-center mb-8 py-2">
-                <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447096/logo-mafianostra.png_hhba91.png" 
-                     alt="MAFIA NO$TRA LOGO 3D" 
-                     class="h-20 md:h-24 object-contain animate-logo-3d drop-shadow-[0_0_20px_rgba(211,18,42,0.4)]">
-            </div>
+        <!-- Canvas para renderizar la galaxia 3D -->
+        <canvas id="galaxy-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
 
-            <!-- Etiqueta de la experiencia -->
-            <span class="inline-block px-3 py-1 bg-brandRed/20 text-brandRed text-[10px] font-black tracking-widest uppercase rounded-full mb-4 border border-brandRed/30">
-                EL CÓDIGO HUMANO
+        <!-- Elementos Flotantes sobre la Galaxia -->
+        <div class="relative z-10 w-full flex justify-between items-center pointer-events-none px-4 md:px-8 pt-4">
+            <img src="https://res.cloudinary.com/zs4kvady/image/upload/v1785447096/logo-mafianostra.png_hhba91.png" alt="MAFIA NO$TRA" class="h-10 md:h-12 object-contain filter drop-shadow-[0_0_15px_rgba(211,18,42,0.6)]">
+            <span class="text-[10px] font-black tracking-widest uppercase text-gray-400 border border-zinc-800 bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+                [ Arrastra para girar la galaxia ]
             </span>
+        </div>
 
-            <!-- Pregunta / Manifiesto Poético -->
-            <h2 class="text-xl md:text-2xl font-black uppercase tracking-wide text-white mb-3">
-                ¿Qué hace que tu corazón reconozca el arte y la poesía en el caos?
-            </h2>
-            <p class="text-xs text-gray-400 mb-6 font-medium leading-relaxed uppercase tracking-wider">
-                Solo los humanos reconocemos lo bello en la oscuridad. Expresa tu alma con libertad: en <span class="text-white font-bold">MAFIA NO$TRA</span> entendemos tu voz.
-            </p>
-
-            <!-- Cuadro de texto para respuesta abierta -->
-            <div class="mb-6">
-                <textarea id="user-expression" rows="3" placeholder="Escribe aquí lo que sientes, tu arte o tu visión..." class="w-full bg-zinc-900/90 border border-zinc-800 focus:border-brandRed text-white text-sm p-4 rounded-lg outline-none resize-none transition duration-300 placeholder:text-zinc-600 focus:ring-1 focus:ring-brandRed"></textarea>
-            </div>
-
-            <!-- Botón de Envío -->
-            <button onclick="submitExpression()" class="w-full bg-brandRed text-white py-4 rounded-lg font-black text-xs uppercase tracking-widest hover:bg-red-700 transition duration-300 shadow-lg shadow-brandRed/20 mb-4">
-                Enviar al Alma de la Mafia
-            </button>
-
-            <!-- Mensaje de Feedback -->
-            <p id="feedback-msg" class="text-xs font-bold uppercase tracking-widest min-h-[20px] mb-3 text-zinc-500"></p>
-
-            <!-- Botón Opcional para Saltar -->
-            <button onclick="unlockWebsite()" class="text-[11px] font-bold text-zinc-500 hover:text-white underline tracking-widest uppercase transition">
-                [ Entrar directamente a la web ]
+        <!-- Botón Inferior de Ingreso -->
+        <div class="relative z-10 mb-8 text-center pointer-events-auto">
+            <button onclick="unlockWebsite()" class="bg-brandRed/90 hover:bg-brandRed text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest transition duration-300 shadow-[0_0_30px_rgba(211,18,42,0.5)] border border-brandRed/50 hover:scale-105 active:scale-95">
+                Ingresar al Universo MAFIA NO$TRA
             </button>
         </div>
     </div>
@@ -399,43 +351,167 @@
         </div>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT DEL PORTAL POÉTICO -->
+    <!-- ======================================================= -->
+    <!-- LÓGICA THREE.JS: GALAXIA 3D INTERACTIVA CON MOUSE / TOUCH -->
+    <!-- ======================================================= -->
     <script>
-        // Bloquear el scroll mientras la capa poética esté activa
         document.body.style.overflow = 'hidden';
 
-        function submitExpression() {
-            const input = document.getElementById('user-expression').value.trim();
-            const feedback = document.getElementById('feedback-msg');
+        // Variables principales de Three.js
+        let scene, camera, renderer, particles;
+        let isMouseDown = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        const overlay = document.getElementById('galaxy-overlay');
 
-            if (input.length > 0) {
-                feedback.className = "text-xs font-bold uppercase tracking-widest min-h-[20px] mb-3 text-spotifyGreen";
-                feedback.innerText = "✓ TU VOZ HA SIDO RECIBIDA. BIENVENIDO A LA FAMILIA...";
-                
-                setTimeout(() => {
-                    unlockWebsite();
-                }, 1200);
-            } else {
-                feedback.className = "text-xs font-bold uppercase tracking-widest min-h-[20px] mb-3 text-brandRed";
-                feedback.innerText = "Escribe algo antes de continuar o presiona saltar.";
+        function initGalaxy() {
+            const container = document.getElementById('galaxy-overlay');
+            const canvas = document.getElementById('galaxy-canvas');
+
+            // 1. Escena
+            scene = new THREE.Scene();
+
+            // 2. Cámara
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 120;
+
+            // 3. Renderizador
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 4. Parámetros de la Galaxia
+            const count = 12000;
+            const arms = 4;
+            const radius = 90;
+            const spin = 1;
+
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+
+            const colorInside = new THREE.Color('#ffffff');
+            const colorMiddle = new THREE.Color('#d3122a'); // Rojo Mafia
+            const colorOutside = new THREE.Color('#3b82f6'); // Azul estelar
+
+            for (let i = 0; i < count; i++) {
+                // Posición radial
+                const r = Math.random() * radius;
+                const spinAngle = r * spin;
+                const armAngle = ((i % arms) / arms) * Math.PI * 2;
+
+                const randomX = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
+                const randomY = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
+                const randomZ = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 5;
+
+                positions[i * 3] = Math.cos(armAngle + spinAngle) * r + randomX;
+                positions[i * 3 + 1] = randomY;
+                positions[i * 3 + 2] = Math.sin(armAngle + spinAngle) * r + randomZ;
+
+                // Color según la distancia del centro
+                const mixedColor = colorInside.clone();
+                if (r < radius * 0.4) {
+                    mixedColor.lerp(colorMiddle, r / (radius * 0.4));
+                } else {
+                    mixedColor.lerp(colorOutside, (r - radius * 0.4) / (radius * 0.6));
+                }
+
+                colors[i * 3] = mixedColor.r;
+                colors[i * 3 + 1] = mixedColor.g;
+                colors[i * 3 + 2] = mixedColor.b;
             }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Material
+            const material = new THREE.PointsMaterial({
+                size: 0.6,
+                sizeAttenuation: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                vertexColors: true
+            });
+
+            // Malla
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Inclinación inicial para verla tipo espiral 3D
+            particles.rotation.x = 0.8;
+
+            // Eventos Mouse/Touch para arrastrar la galaxia con la mano
+            container.addEventListener('mousedown', onPointerDown);
+            container.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+
+            container.addEventListener('touchstart', onPointerDown);
+            container.addEventListener('touchmove', onPointerMove);
+            window.addEventListener('touchend', onPointerUp);
+
+            window.addEventListener('resize', onWindowResize);
+
+            animate();
+        }
+
+        function onPointerDown(e) {
+            isMouseDown = true;
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            previousMousePosition = { x, y };
+        }
+
+        function onPointerMove(e) {
+            if (!isMouseDown) return;
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+
+            const deltaMove = {
+                x: x - previousMousePosition.x,
+                y: y - previousMousePosition.y
+            };
+
+            particles.rotation.y += deltaMove.x * 0.008;
+            particles.rotation.x += deltaMove.y * 0.008;
+
+            previousMousePosition = { x, y };
+        }
+
+        function onPointerUp() {
+            isMouseDown = false;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotación suave continua cuando no se interactúa
+            if (!isMouseDown && particles) {
+                particles.rotation.y += 0.0015;
+            }
+
+            renderer.render(scene, camera);
         }
 
         function unlockWebsite() {
-            const overlay = document.getElementById('quiz-overlay');
             overlay.style.opacity = '0';
-            
             setTimeout(() => {
                 overlay.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Habilitar scroll
-                
-                // Asegurar reproducción del video hero
+                document.body.style.overflow = 'auto';
+
                 const video = document.getElementById('hero-video');
                 if (video) {
                     video.play().catch(e => console.log("Autoplay interactivo listo"));
                 }
-            }, 700);
+            }, 1000);
         }
+
+        // Inicializar galaxia al cargar la página
+        window.onload = initGalaxy;
     </script>
 </body>
 </html>
